@@ -4,8 +4,10 @@ export interface Entity { id: string; label: string; category: Exclude<Category,
 export interface UploadedFile { id: string; name: string; size: number; lastModified: number }
 export interface Paper extends UploadedFile { title: string; authors: string; year: string; venue: string; objective: string; entities: string[]; context: string; sample: boolean }
 export const categoryStyles: Record<Category, {color:string; bg:string}> = {
- Paper:{color:'#7497CB',bg:'#1B3363'}, 'Research topic':{color:'#7497CB',bg:'#225096'}, Method:{color:'#7497CB',bg:'#203A6F'}, Dataset:{color:'#7497CB',bg:'#1B3363'}, Finding:{color:'#7497CB',bg:'#225096'}, Limitation:{color:'#7497CB',bg:'#203A6F'},
+ Paper:{color:'#BDC9DB',bg:'#243956'}, 'Research topic':{color:'#7497CB',bg:'#294A70'}, Method:{color:'#639BDB',bg:'#233E61'}, Dataset:{color:'#A9A4D0',bg:'#303F61'}, Finding:{color:'#8DBCB5',bg:'#27464E'}, Limitation:{color:'#B3BEC8',bg:'#344254'},
 }
+export const categoryLabels: Record<Category,string> = {Paper:'Papers','Research topic':'Topics',Method:'Methods',Dataset:'Datasets',Finding:'Findings',Limitation:'Limitations'}
+
 export const entities: Entity[] = [
  ['vulnerability','Vulnerability Detection','Research topic','Identifying security weaknesses in source code.'],
  ['security','Software Security','Research topic','Understanding and reducing software security risks.'],

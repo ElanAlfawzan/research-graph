@@ -69,3 +69,20 @@ test('startup preserves a saved user collection instead of replacing it with the
  assert.deepEqual(restorePapers(JSON.stringify(files)),buildPapers(files))
  assert.notEqual(restorePapers(null),restorePapers(null))
 })
+
+test('home graph shows concrete entities from all six legend categories and only real demo relationships',async()=>{
+ const {previewNodes,previewEdges}=await import('../src/graph-preview.ts')
+ const {categoryStyles}=await import('../src/data.ts')
+ assert.deepEqual(new Set(previewNodes.map(n=>n.category)),new Set(Object.keys(categoryStyles)))
+ for(const node of previewNodes){
+  if(node.category==='Paper')assert.ok(papers.some(p=>p.id===node.id&&p.title===node.description))
+  else assert.ok(entities.some(e=>e.id===node.id&&e.category===node.category&&e.label===node.label))
+  assert.ok(!['Papers','Topics','Methods','Datasets','Findings','Limitations'].includes(node.label))
+  assert.ok(previewEdges.some(e=>e.source===node.id||e.target===node.id))
+ }
+ for(const edge of previewEdges){
+  assert.ok(papers.find(p=>p.id===edge.source)?.entities.includes(edge.target))
+  assert.ok(previewNodes.some(n=>n.id===edge.source))
+  assert.ok(previewNodes.some(n=>n.id===edge.target))
+ }
+})
