@@ -3,7 +3,7 @@ export interface Entity { id: string; label: string; category: Exclude<Category,
 export interface UploadedFile { id: string; name: string; size: number; lastModified: number }
 export interface Paper extends UploadedFile { title: string; authors: string; year: string; venue: string; objective: string; entities: string[]; context: string; sample: boolean }
 export const categoryStyles: Record<Category, {color:string; bg:string}> = {
- Paper:{color:'#71889d',bg:'#eaf0f5'}, 'Research topic':{color:'#375f76',bg:'#e5eff3'}, Method:{color:'#638eb8',bg:'#eaf2fb'}, Dataset:{color:'#9c85ba',bg:'#f0eaf8'}, Finding:{color:'#68a394',bg:'#eaf5f0'}, Limitation:{color:'#c39477',bg:'#faf0e9'},
+ Paper:{color:'#7497CB',bg:'#1B3363'}, 'Research topic':{color:'#7497CB',bg:'#225096'}, Method:{color:'#7497CB',bg:'#203A6F'}, Dataset:{color:'#7497CB',bg:'#1B3363'}, Finding:{color:'#7497CB',bg:'#225096'}, Limitation:{color:'#7497CB',bg:'#203A6F'},
 }
 export const entities: Entity[] = [
  ['vulnerability','Vulnerability Detection','Research topic','Identifying security weaknesses in source code.'],

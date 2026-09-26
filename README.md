@@ -1,6 +1,6 @@
-# Research Graph
+# SILAH
 
-**Don’t just find papers. Discover what’s missing between them.**
+**Connected Knowledge**
 
 A React + TypeScript hackathon prototype that turns a supplied paper collection into an interactive knowledge graph with traceable research opportunities.
 
@@ -48,10 +48,10 @@ The application uses hash routes such as `/#graph` and `/#insights`; no SPA rewr
 
 ## Demo and scope
 
-Upload the eight PDFs in `public/demo-papers/`, download `public/demo-papers.zip`, or choose **Use the sample collection** on New Analysis. Follow Analyze Papers → Research Graph → CodeBERT → View Insights → View Evidence → Explore in Graph.
+Upload the eight PDFs in `public/demo-papers/`, download `public/demo-papers.zip`, or choose **Use Demo Collection** on New Analysis. Follow Analyze Papers → Research Graph → CodeBERT → View Insights → View Evidence → Explore in Graph.
 
 **Analysis and insights are simulated using fictional metadata. PDF contents are not extracted or analyzed.** The provided filenames map to demo studies; other PDFs receive demo templates. All demo data is bundled, and no external AI or academic search service is used. Uploaded file metadata stays in browser storage; PDF bytes are not sent to a backend.
 
-A new deployed origin starts with an empty collection. Paper-detail selection and graph focus are session state; saved collection metadata survives refresh on the same origin. Offline demos require the installed local server; this is not an installable offline PWA.
+On a fresh browser, use New Analysis → Use Demo Collection → Analyze Papers → Explore Research Graph to load the complete bundled experience. The demo works without browser history or external services. Paper-detail selection and graph focus are session state; saved collection metadata survives refresh on the same origin. Offline demos require the installed local server; this is not an installable offline PWA.
 
 See [QA.md](QA.md) for verification coverage and limitations. Tests and the optional PDF-generation script are development tools and are not included in the production site.

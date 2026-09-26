@@ -1,4 +1,4 @@
-# Research Graph verification
+# SILAH verification
 
 Final verification: 25 September 2026. Existing screens and product scope were preserved.
 
@@ -36,3 +36,11 @@ OS-level Finder-to-browser file dragging was not conclusively verified. Finder a
 ## Product boundaries
 
 Analysis, extracted entities, findings, insights, reasoning, and research suggestions are simulated fictional metadata. PDF contents are not parsed or analyzed. Basic upload validation checks extension, size, duplicates, and the PDF header. No academic database, AI API, or network retrieval is used. One analyzed collection is retained per browser origin; raw PDF bytes and custom graph positions are not retained. Potential gaps do not establish novelty in the wider literature.
+
+## SILAH final update
+
+The production preview was verified with fresh browser storage: Home → New Analysis → Use Demo Collection (8 papers) → processing → Research Graph (30 nodes / 57 edges) → CodeBERT → Insights → multilingual potential gap → 6 supporting evidence records / 4 research directions → Explore in Graph (12 highlighted nodes, 19 emphasized edges).
+
+Graph/table navigation, node dragging and zoom controls, all paper detail tabs, all four insight categories, and console error checks passed. The automated upload suite verifies independent PDF drops, invalid files, duplicate protection, nested drag highlights, and repeatable demo loading.
+
+SILAH uses blue surfaces and interactions, cream evidence cards, and bronze accents reserved for potential opportunities and their graph evidence. Demo filenames and the existing storage key stay stable for compatibility.

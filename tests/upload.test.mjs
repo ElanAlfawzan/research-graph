@@ -47,7 +47,7 @@ test('drop handler accepts eight PDFs, renders them, enables analysis and suppor
 test('actual PDF dropped after the sample shortcut is rejected as a duplicate',async()=>{
  const ui=await mount()
  try{
-  await act(async()=>ui.button('Use the sample collection').click())
+  await act(async()=>ui.button('Use Demo Collection').click())
   await ui.drop([await fixture(1)])
   assert.equal(ui.host.querySelectorAll('.upload-row').length,8)
   assert.match(ui.host.querySelector('[role="alert"]').textContent,/already added/)
@@ -73,5 +73,19 @@ test('drag highlight remains active across child elements and clears on leaving 
   await act(async()=>ui.send(ui.dropzone(),'dragenter'))
   await ui.drop([await fixture(1)])
   assert.equal(ui.dropzone().classList.contains('dragging'),false)
+ }finally{await ui.close()}
+})
+test('demo collection is bundled, repeatable, and uses the normal Analyze Papers action',async()=>{
+ const ui=await mount()
+ try{
+  assert.equal(ui.host.querySelectorAll('.upload-row').length,0)
+  await act(async()=>ui.button('Use Demo Collection').click())
+  assert.equal(ui.host.querySelectorAll('.upload-row').length,8)
+  assert.equal(ui.button('Analyze Papers').disabled,false)
+  await act(async()=>ui.button('Use Demo Collection').click())
+  assert.equal(ui.host.querySelectorAll('.upload-row').length,8)
+  assert.equal(ui.host.querySelectorAll('[role="alert"]').length,0)
+  await act(async()=>ui.button('Analyze Papers').click())
+  assert.equal(ui.analyzed,1)
  }finally{await ui.close()}
 })
