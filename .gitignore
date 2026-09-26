@@ -1,0 +1,27 @@
+# Dependencies and build output
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Environment files and local deployment state
+.env
+.env.*
+!.env.example
+.vercel/
+
+# Test output, temporary files, and caches
+playwright-report/
+test-results/
+coverage/
+tests/.tmp/
+.cache/
+.vite/
+tmp/
+*.log
+
+# OS and editor-local files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
