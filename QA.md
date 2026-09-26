@@ -44,3 +44,5 @@ The production preview was verified with fresh browser storage: Home → New Ana
 Graph/table navigation, node dragging and zoom controls, all paper detail tabs, all four insight categories, and console error checks passed. The automated upload suite verifies independent PDF drops, invalid files, duplicate protection, nested drag highlights, and repeatable demo loading.
 
 SILAH uses blue surfaces and interactions, cream evidence cards, and bronze accents reserved for potential opportunities and their graph evidence. Demo filenames and the existing storage key stay stable for compatibility.
+
+First-launch regression: missing, empty, invalid, or unavailable browser storage falls back to all eight bundled studies and all six insights. A valid saved user collection is preserved. New Analysis continues to support independent uploads and the demo-loading button.

@@ -1,3 +1,4 @@
+import { sampleFiles } from './sample-files.ts'
 export type Category = 'Paper' | 'Research topic' | 'Method' | 'Dataset' | 'Finding' | 'Limitation'
 export interface Entity { id: string; label: string; category: Exclude<Category, 'Paper'>; description: string }
 export interface UploadedFile { id: string; name: string; size: number; lastModified: number }
@@ -39,7 +40,7 @@ const templates = [
  {title:'Graph representations for smart contract security',objective:'Explore program graphs in a bounded smart contract setting.',entities:['contracts','gnn','cwe','accuracy','scope','realworld'],context:'Selected smart contract cases'},
  {title:'Evaluating learned detectors beyond familiar benchmarks',objective:'Explore how evaluation context affects vulnerability model behavior.',entities:['vulnerability','transformer','devign','generalization','language','bias','realworld'],context:'Generalization beyond familiar benchmark contexts'},
 ]
-export { sampleFiles } from './sample-files.ts'
+export { sampleFiles }
 export function buildPapers(files: UploadedFile[]): Paper[] {return files.map((file,i)=>{const match=file.name.match(/^research-graph-demo-(0[1-8])\.pdf$/);const t=templates[match?Number(match[1])-1:i%templates.length];return {...file,...t,authors:'Fictional demo research team',year:'Demo · no publication year',venue:'Illustrative study · not a published paper',sample:!!match}})}
 export const entityById = (id:string)=>entities.find(e=>e.id===id)
 export const paperEntities = (paper:Paper,category?:Category)=>paper.entities.map(entityById).filter((e):e is Entity=>!!e&&(!category||e.category===category))
@@ -63,4 +64,16 @@ export function availableInsights(papers: Paper[]): Insight[] {
   if (insight.id === 'conflict') return contains('accuracy') && contains('generalization')
   return supportingPapers(insight, papers).length >= 2
  })
+}
+
+// Ship the complete prototype on first launch; retain any valid saved collection.
+export function restorePapers(saved: string | null): Paper[] {
+ try {
+  const parsed: unknown = JSON.parse(saved ?? 'null')
+  if (Array.isArray(parsed)) {
+   const files = parsed.filter((f): f is UploadedFile => !!f && typeof f === 'object' && typeof f.id === 'string' && typeof f.name === 'string' && typeof f.size === 'number' && typeof f.lastModified === 'number').slice(0, 24)
+   if (files.length) return buildPapers(files)
+  }
+ } catch { /* Invalid browser storage must not hide the bundled demo. */ }
+ return buildPapers(sampleFiles)
 }

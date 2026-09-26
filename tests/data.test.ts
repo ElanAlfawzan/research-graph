@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { buildPapers, entities, insights, sampleFiles, supportingPapers, graphFocus } from '../src/data.ts'
+import { buildPapers, restorePapers, availableInsights, entities, insights, sampleFiles, supportingPapers, graphFocus } from '../src/data.ts'
 import { validateFiles, MAX_FILE_BYTES } from '../src/upload.ts'
 const papers = buildPapers(sampleFiles)
 test('complete demo graph has eight distinct papers and no dangling entity references',()=>{
@@ -54,4 +54,18 @@ test('partial collections do not claim comparisons that lack supporting records'
  assert.equal(availableInsights(papers).length,6)
  assert.equal(availableInsights([papers[0]]).length,0)
  assert.ok(!availableInsights(papers.filter(p=>!p.entities.includes('llm'))).some(i=>i.id==='comparison'))
+})
+
+test('first launch and empty or invalid storage show the complete bundled prototype',()=>{
+ for (const saved of [null, '[]', '{}', 'invalid json', '[null,{"name":"incomplete.pdf"}]']) {
+  const initial = restorePapers(saved)
+  assert.equal(initial.length,8)
+  assert.equal(availableInsights(initial).length,6)
+  assert.equal(supportingPapers(insights.find(i=>i.id==='languages')!,initial).length,6)
+ }
+})
+test('startup preserves a saved user collection instead of replacing it with the demo',()=>{
+ const files=[{id:'user-1',name:'my-research.pdf',size:1200,lastModified:42}]
+ assert.deepEqual(restorePapers(JSON.stringify(files)),buildPapers(files))
+ assert.notEqual(restorePapers(null),restorePapers(null))
 })

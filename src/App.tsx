@@ -7,11 +7,11 @@ import Graph from './components/Graph'
 import { Papers, PaperDetails } from './components/Papers'
 import { Insights, Opportunity } from './components/Insights'
 import { EmptyState } from './components/shared'
-import { buildPapers, insights } from './data'
+import { buildPapers, insights, restorePapers } from './data'
 import type { UploadedFile, Paper } from './data'
 const pages:Record<string,string>={home:'Home',upload:'New Analysis',papers:'My Papers',graph:'Research Graph',insights:'Insights',processing:'Analysis in progress',paper:'Paper Details',opportunity:'Research Opportunity'}
 const storageKey='research-graph-collection-v1'
-function restore():Paper[]{try{const parsed:unknown=JSON.parse(localStorage.getItem(storageKey)??'[]');if(!Array.isArray(parsed))return [];const files=parsed.filter((f):f is UploadedFile=>!!f&&typeof f==='object'&&typeof f.id==='string'&&typeof f.name==='string'&&typeof f.size==='number'&&typeof f.lastModified==='number').slice(0,24);return buildPapers(files)}catch{return []}}
+function restore():Paper[]{try{return restorePapers(localStorage.getItem(storageKey))}catch{return restorePapers(null)}}
 export default function App(){
  const [page,setPage]=useState(()=>{const p=window.location.hash.slice(1);return ['home','upload','papers','graph','insights'].includes(p)?p:'home'})
  const [files,setFiles]=useState<UploadedFile[]>([]);const [papers,setPapers]=useState<Paper[]>(restore)
